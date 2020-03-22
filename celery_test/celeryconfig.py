@@ -19,6 +19,7 @@ CELERY_QUEUES = {
         'binding_key': 'work_tasks'
     }
 }
+CELERY_TIMEZONE = 'Asia/Shanghai'
 
 #设置默认的队列
 CELERY_DEFAULT_QUEUE = 'work_tasks'
@@ -27,6 +28,8 @@ CELERY_DEFAULT_QUEUE = 'work_tasks'
 CELERY_IMPORTS = (
     'app01.tasks',
 )
+
+
 
 #有些情况防止死锁
 CELERYD_FORCE_EXECV = True
@@ -57,7 +60,7 @@ CELERYBEAT_SCHEDULE = {
     },
     'task2': {
         'task': 'spider',  # 指定任务名称
-        'schedule':crontab(minute='19', hour='16', day_of_week='*',day_of_month='*', month_of_year='*'),  # 任务执行时间，每5秒执行一次
+        'schedule':crontab(minute='*', hour='*', day_of_week='*',day_of_month='*', month_of_year='*'),  # 任务执行时间，每5秒执行一次
         'options': {
         'queue': 'beat_tasks'
         }
